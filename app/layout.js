@@ -1,6 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -22,23 +23,24 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <ClerkProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
             <Navbar />
             <main>{children}</main>
             <Footer />
-          </ClerkProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+            <Toaster position="bottom-right" />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
