@@ -22,14 +22,12 @@ export default clerkMiddleware(async (auth, req) => {
     (req.nextUrl.pathname.startsWith("/sign-in") ||
       req.nextUrl.pathname.startsWith("/sign-up"))
   ) {
-    const dashboardUrl = new URL("/dashboard", req.url);
-    return NextResponse.redirect(dashboardUrl);
+    return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
-  // Protect non-public routes
-  if (!isPublicRoute(req)) {
-    // This will throw and block access if not authorized
-    await auth.protect();
+  // If route is NOT public and user is NOT logged in → redirect to sign-in
+  if (!isPublicRoute(req) && !userId) {
+    return NextResponse.redirect(new URL("/sign-in", req.url));
   }
 
   return NextResponse.next();

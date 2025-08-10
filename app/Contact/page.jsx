@@ -66,9 +66,13 @@ export default function Contact() {
       {/* Header */}
       <section className="pt-32 pb-20 bg-gray-100 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-extrabold sm:text-5xl lg:text-6xl">
+          <h1
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+          >
             Contact Us
           </h1>
+
           <p className="mt-5 max-w-xl mx-auto text-xl text-gray-600 dark:text-gray-300">
             Have questions or need help? We're here for you.
           </p>

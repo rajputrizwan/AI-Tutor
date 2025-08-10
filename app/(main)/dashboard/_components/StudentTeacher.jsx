@@ -175,7 +175,12 @@ Best regards,
         throw new Error("Failed to generate feedback");
       }
       const data = await res.json();
-      setFeedback(data.feedback.replace(/Best regards,[\s\S]*$/i, "").trim());
+      setFeedback(
+        data.feedback
+          .replace(/Dear\s+\[Teacher's Name\],\s*/i, "")
+          .replace(/Best regards,[\s\S]*$/i, "")
+          .trim()
+      );
     } catch (err) {
       setFeedback(`Error: ${err.message}`);
     } finally {
